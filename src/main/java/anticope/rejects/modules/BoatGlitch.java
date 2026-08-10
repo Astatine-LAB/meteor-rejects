@@ -12,6 +12,7 @@ import meteordevelopment.meteorclient.systems.modules.Modules;
 import meteordevelopment.meteorclient.utils.misc.input.KeyAction;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.network.protocol.game.ServerboundInteractPacket;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.vehicle.boat.AbstractBoat;
@@ -110,7 +111,7 @@ public class BoatGlitch extends Module {
         if (remountTicks > 0) {
             remountTicks--;
             if (remountTicks == 0) {
-                mc.getConnection().send(new ServerboundInteractPacket(boat.getId(), InteractionHand.MAIN_HAND, boat.position(), false));
+                mc.getConnection().send( new ServerboundInteractPacket(boat.getId(), InteractionHand.MAIN_HAND, Vec3.ZERO, false));
                 if (toggleAfter.get()) {
                     toggle();
                 }

@@ -18,6 +18,7 @@ import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ServerboundInteractPacket;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.network.protocol.game.ServerboundPlayerInputPacket;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -99,12 +100,12 @@ public class InteractionScreen extends Screen {
                     minecraft.player.connection.send(new ServerboundPlayerInputPacket(new net.minecraft.world.entity.player.Input(false, false, false, false, false, true, false)));
 
                 }
-                minecraft.player.connection.send(new ServerboundInteractPacket(entity.getId(), InteractionHand.MAIN_HAND, entity.position(), true));
+                minecraft.player.connection.send(new ServerboundInteractPacket(entity.getId(), InteractionHand.MAIN_HAND, Vec3.ZERO, true));
                 minecraft.player.setShiftKeyDown(false);
             });
             case AbstractMinecartContainer storageMinecartEntity -> functions.put("Open Inventory", (Entity e) -> {
                 closeScreen();
-                minecraft.player.connection.send(new ServerboundInteractPacket(entity.getId(), InteractionHand.MAIN_HAND, entity.position(), true));
+                minecraft.player.connection.send(new ServerboundInteractPacket(entity.getId(), InteractionHand.MAIN_HAND, Vec3.ZERO, true));
             });
             case null, default -> functions.put("Open Inventory", (Entity e) -> {
                 closeScreen();

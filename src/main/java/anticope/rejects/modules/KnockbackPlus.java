@@ -30,13 +30,14 @@ public class KnockbackPlus extends Module {
 
     @EventHandler
     private void onSendPacket(PacketEvent.Send event) {
-        if (event.packet instanceof ServerboundAttackPacket packet) {
-            Entity entity = mc.level.getEntity(packet.entityId());
-            if (!(entity instanceof LivingEntity) || (entity != Modules.get().get(KillAura.class).getTarget() && ka.get()))
-                return;
+        // Attacks are their own packet since 26.1; the entity is looked up from its id.
+        if (!(event.packet instanceof ServerboundAttackPacket packet)) return;
+        if (mc.player == null || mc.level == null) return;
 
-            assert mc.player != null;
-            mc.player.connection.send(new ServerboundPlayerCommandPacket(mc.player, ServerboundPlayerCommandPacket.Action.START_SPRINTING));
-        }
+        Entity entity = mc.level.getEntity(packet.entityId());
+        if (!(entity instanceof LivingEntity) || (entity != Modules.get().get(KillAura.class).getTarget() && ka.get()))
+            return;
+
+        mc.player.connection.send(new ServerboundPlayerCommandPacket(mc.player, ServerboundPlayerCommandPacket.Action.START_SPRINTING));
     }
 }

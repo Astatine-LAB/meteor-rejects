@@ -98,11 +98,11 @@ public class KillAuraMixin extends Module {
         );
     }
 
-    @Inject(method = "entityCheck", at = @At(value = "RETURN", ordinal = 14), cancellable = true)
+    @Inject(method = "entityCheck", at = @At("RETURN"), cancellable = true)
     private void onReturn(Entity entity, CallbackInfoReturnable<Boolean> info) {
+        if (!info.getReturnValueZ()) return;
         if (ignoreInvisible.get() && entity.isInvisible()) info.setReturnValue(false);
         if (!RejectsUtils.inFov(entity, fov.get())) info.setReturnValue(false);
-        info.setReturnValue(info.getReturnValueZ());
     }
 
     @Inject(method = "attack", at = @At("HEAD"), cancellable = true)

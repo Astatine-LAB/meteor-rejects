@@ -29,7 +29,7 @@ public class Rendering extends Module {
 			.defaultValue(true)
             .onChanged(onChanged -> {
                 if(this.isActive()) {
-                    mc.levelRenderer.allChanged();
+                    mc.levelExtractor.allChanged();
                 }
             })
 			.build()
@@ -72,12 +72,12 @@ public class Rendering extends Module {
 
     @Override
     public void onActivate() {
-        mc.levelRenderer.allChanged();
+        mc.levelExtractor.allChanged();
     }
 
     @Override
     public void onDeactivate() {
-        mc.levelRenderer.allChanged();
+        mc.levelExtractor.allChanged();
     }
 
     public void onChanged(Shader s) {

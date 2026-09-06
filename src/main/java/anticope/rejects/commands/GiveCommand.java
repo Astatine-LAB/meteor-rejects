@@ -14,7 +14,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.DoubleTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -104,7 +104,7 @@ public class GiveCommand extends Command {
 
             var changes = DataComponentPatch.builder()
                     .set(DataComponents.CUSTOM_NAME, Component.literal(message))
-                    .set(DataComponents.ENTITY_DATA, TypedEntityData.of(EntityType.WITHER, tag))
+                    .set(DataComponents.ENTITY_DATA, TypedEntityData.of(EntityTypes.WITHER, tag))
                     .build();
             stack.applyComponentsAndValidate(changes);
 
@@ -151,7 +151,7 @@ public class GiveCommand extends Command {
 
         var changes = DataComponentPatch.builder()
                 .set(DataComponents.CUSTOM_NAME, Component.literal(message))
-                .set(DataComponents.ENTITY_DATA, TypedEntityData.of(EntityType.ARMOR_STAND, tag))
+                .set(DataComponents.ENTITY_DATA, TypedEntityData.of(EntityTypes.ARMOR_STAND, tag))
                 .build();
 
         stack.applyComponentsAndValidate(changes);

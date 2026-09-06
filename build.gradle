@@ -1,6 +1,6 @@
 plugins {
 	id 'java'
-	id 'fabric-loom' version '1.17.19'
+	id 'net.fabricmc.fabric-loom' version '1.17.19'
 }
 
 java {
@@ -76,7 +76,8 @@ dependencies {
 
 processResources {
 	inputs.property "version", project.version
-
+	inputs.property "mc_version", project.minecraft_version
+	inputs.property "gh_hash", (System.getenv("GITHUB_SHA") ?: "")
 
 	filesMatching("fabric.mod.json") {
 		expand "version": project.version,
